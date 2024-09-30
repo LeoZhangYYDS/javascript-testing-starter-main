@@ -1,5 +1,10 @@
 import { it, expect, describe } from "vitest";
-import { calculateDiscount, getCoupons, isPriceInRange } from "../core";
+import {
+  calculateDiscount,
+  getCoupons,
+  isPriceInRange,
+  fetchData,
+} from "../core";
 
 describe("getCoupons", () => {
   it("should return an array of coupons", () => {
@@ -43,5 +48,14 @@ describe("isPriceInRange", () => {
     { scenario: "price between min and max", price: 50, result: true },
   ])("Should return $result when $scenario", ({ price, result }) => {
     expect(isPriceInRange(price, 0, 100)).toBe(result);
+  });
+});
+
+//测试 async code
+describe("fetchData", () => {
+  it("should return a promise that will resolve to an array of number", async () => {
+    const result = await fetchData();
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBeGreaterThan(0);
   });
 });
